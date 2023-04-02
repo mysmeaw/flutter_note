@@ -5,12 +5,11 @@ import 'package:flutter/physics.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppStyle {
-  static Color bgColor = Color(0xFFe2e2ff);
-  static Color mainColor = Color(0xFF000633);
-  static Color accentColor = Color(0xFF0065FF);
+  static Color bgColor = Color.fromARGB(255, 12, 12, 12);
+  static Color mainColor = Color.fromARGB(255, 255, 255, 255);
+  static Color accentColor = Color.fromARGB(255, 20, 57, 112);
 
   static List<Color> cardColor = [
-    Colors.white,
     Colors.red.shade100,
     Colors.pink.shade100,
     Colors.orange.shade100,

@@ -20,18 +20,18 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0.0,
-        title: const Text("FireNotes"),
+        title: const Text("Mynotes"),
         centerTitle: true,
-        backgroundColor: AppStyle.mainColor,
+        backgroundColor: AppStyle.accentColor,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Your recent Notes",
+            "this is my notes all",
             style: GoogleFonts.roboto(
-              color: Colors.white,
+              color: Colors.black,
               fontWeight: FontWeight.bold,
               fontSize: 22,
             ),
@@ -43,27 +43,24 @@ class _HomeScreenState extends State<HomeScreen> {
             child: StreamBuilder<QuerySnapshot>(
               stream:
                   FirebaseFirestore.instance.collection("Notes").snapshots(),
-              builder: (context, AsyncSnapshot snapshot) {
+              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
+                    
                     child: CircularProgressIndicator(),
                   );
                 }
 
+               
                 if (snapshot.hasData) {
                   return GridView(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
                     children: snapshot.data!.docs
-                        .map((note) => noteCard(() {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        NoteReaderScreen(note),
-                                  ));
-                            }, note))
+                        .map((note) => noteCard(() {}, note))
                         .toList(),
+                        
                   );
                 }
                 return Text(
@@ -77,8 +74,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.push(context,
-          MaterialPageRoute(builder:(context) => const NoteEditorScreen()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const NoteEditorScreen()));
         },
         label: const Text("Add Note"),
         icon: const Icon(Icons.add),

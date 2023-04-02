@@ -73,7 +73,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
             "note_title": _titleController.text,
             "creation_date": date,
             "note_content": _mainController.text,
-            "color_id": color_id
+            "color_id": color_id,
           }).then((value) {
             print(value.id);
             Navigator.pop(context);
